@@ -1,32 +1,33 @@
 import personaje.*
 import cultivos.*
 import wollok.game.*
+import aspersorYPosiciones.*
 
 describe "Test de la siembra de cultivos" {
     test "Testeo de la siembra: Maiz" {
-        hector.sembrar(maizFactory)
+        hector.sembrar(maiz)
         assert.equals("Maiz", game.uniqueCollider(hector).nombre())
     }
 
     test "Testeo de la siembra: Trigo" {
-        hector.sembrar(trigoFactory)
+        hector.sembrar(trigo)
         assert.equals("Trigo", game.uniqueCollider(hector).nombre())
     }
 
     test "Testeo de la siembra: Tomaco" {
-        hector.sembrar(tomacoFactory)
+        hector.sembrar(tomaco)
         assert.equals("Tomaco", game.uniqueCollider(hector).nombre())
     }
 
     test "Testeo de la siembra: No se puede sembrar" {
-        hector.sembrar(maizFactory)
-        assert.throwsException({hector.sembrar(maizFactory)})
+        hector.sembrar(maiz)
+        assert.throwsException({hector.sembrar(maiz)})
     }
 }
 
 describe "Test del riego de cultivos"{
     test "Test de riego: Maiz" {
-        hector.sembrar(maizFactory)
+        hector.sembrar(maiz)
         hector.regar()
         assert.equals(adult, game.uniqueCollider(hector).estado())
         hector.regar()
@@ -34,7 +35,7 @@ describe "Test del riego de cultivos"{
     }
 
     test "Test de riego: Trigo" {
-        hector.sembrar(trigoFactory)
+        hector.sembrar(trigo)
         hector.regar()
         assert.equals(1, game.uniqueCollider(hector).etapa())
         hector.regar()
@@ -46,18 +47,18 @@ describe "Test del riego de cultivos"{
     }
     
     test "Test de riego: Tomaco" {
-        hector.sembrar(tomacoFactory)
+        hector.sembrar(tomaco)
         hector.regar()
         hector.position(hector.position().up(1))
-        assert.throwsException({ hector.sembrar(tomacoFactory) })
+        assert.throwsException({ hector.sembrar(tomaco) })
     }
 
     test "Test de riego: Tomaco caso limite" {
         hector.position(game.at(0,game.height() - 1))
-        hector.sembrar(tomacoFactory)
+        hector.sembrar(tomaco)
         hector.regar()
         hector.position(game.at(0,0))
-        assert.throwsException({ hector.sembrar(tomacoFactory) })
+        assert.throwsException({ hector.sembrar(tomaco) })
     }
     test "Test de riego: No hay cultivo" {
         assert.throwsException({ hector.regar() })
@@ -66,7 +67,7 @@ describe "Test del riego de cultivos"{
 
 describe "Test de la cosecha de cultivos" {
     test "Test de cosecha: Maiz" {
-        hector.sembrar(maizFactory)
+        hector.sembrar(maiz)
         hector.cosechar()
         assert.equals("Maiz", game.uniqueCollider(hector).nombre())
         hector.regar()
@@ -75,7 +76,7 @@ describe "Test de la cosecha de cultivos" {
     }
 
     test "Test de cosecha: Trigo" {
-        hector.sembrar(trigoFactory)
+        hector.sembrar(trigo)
         hector.cosechar()
         assert.equals("Trigo", game.uniqueCollider(hector).nombre())
         hector.regar()
@@ -87,12 +88,122 @@ describe "Test de la cosecha de cultivos" {
     }
 
     test "Test de cosecha: Tomaco" {
-        hector.sembrar(tomacoFactory)
+        hector.sembrar(tomaco)
         hector.cosechar()
         assert.that(game.colliders(hector).isEmpty())
     }
 
     test "Test de cosecha: No hay cultivo" {
         assert.throwsException({ hector.cosechar() })
+    }
+}
+
+describe "Test de la venta de cultivos" {
+    test "Test venta de 1 maiz por 150 monedas" {
+        hector.sembrar(maiz)
+        hector.regar()
+        hector.cosechar()
+        assert.equals(150, hector.oroTotalPlantasCosechadas())
+    }
+
+    test "Test venta de 1 trigo etapa 2 por 100 monedas" {
+        hector.sembrar(trigo)
+        hector.regar()
+        hector.regar()
+        hector.cosechar()
+        assert.equals(100, hector.oroTotalPlantasCosechadas())
+    }
+
+    test "Test venta de 1 trigo etapa 3 por 200 monedas" {
+        hector.sembrar(trigo)
+        hector.regar()
+        hector.regar()
+        hector.regar()
+        hector.cosechar()
+        assert.equals(100, hector.oroTotalPlantasCosechadas())
+    }
+
+    test "Test venta de 1 tomaco por 80 monedas" {
+        hector.sembrar(tomaco)
+        hector.cosechar()
+        assert.equals(80, hector.oroTotalPlantasCosechadas())
+    }
+}
+
+describe "Test del aspersor y su funcionamiento" {
+    var maizArribaIzquierda
+    var maizArriba
+    var maizArribaDerecha
+    var maizIzquierda
+    var maizDerecha
+    var maizAbajoIzquierda
+    var maizAbajo
+    var maizAbajoDerecha
+    var aspersorPrueba
+
+    method initialize() {
+        maizArribaIzquierda = new Maiz(position = game.at(4,5))
+        maizArriba = new Maiz(position = game.at(5,5))
+        maizArribaDerecha = new Maiz(position = game.at(6,5))
+        maizIzquierda= new Maiz(position = game.at(4,4))
+        maizDerecha= new Maiz(position = game.at(6,4))
+        maizAbajoIzquierda = new Maiz(position = game.at(4,3))
+        maizAbajo = new Maiz(position = game.at(5,3))
+        maizAbajoDerecha= new Maiz(position = game.at(6,3))
+        aspersorPrueba = new Aspersor(position = game.at(5, 4))
+    }
+    test "Test del aspersor - Verificaciones: Comprobar si la parcela está vacia en la posicion dada" {
+        game.addVisual(maizArriba)
+        assert.notThat(aspersorPrueba.esUnaParcelaVacia(game.at(5,5)))
+        assert.that(aspersorPrueba.esUnaParcelaVacia(game.at(0,0)))
+    }
+
+    test "Test del aspersor - Verificaciones: Comprobar si hay elemento unico en la posicion dada" {
+        game.addVisual(maizArriba)
+        assert.that(aspersorPrueba.hayElementoUnicoEn(game.at(5,5)))
+        const maizDuplicado = new Maiz(position = game.at(5, 5))
+        game.addVisual(maizDuplicado)
+        assert.notThat(aspersorPrueba.hayElementoUnicoEn(game.at(5,5)))
+    }
+
+    test "Test del aspersor - Verificaciones: Comprobar si el elemento unico es un cultivo en la posicion dada" {
+        game.addVisual(maizArriba)
+        assert.that(aspersorPrueba.esCultivoElElementoUnicoEn(game.at(5,5)))
+        game.addVisual(hector)
+        hector.position(game.at(0,0))
+        assert.notThat(aspersorPrueba.esCultivoElElementoUnicoEn(game.at(0,0)))
+    }
+
+    test "Test del aspersor - Verificaciones: Comprobar si hay un cultivo en la posicion dada" {
+        game.addVisual(maizArriba)
+        assert.that(aspersorPrueba.hayUnCultivoEn(game.at(5,5)))
+        game.removeVisual(maizArriba)
+        assert.notThat(aspersorPrueba.hayUnCultivoEn(game.at(5,5)))
+    }
+
+    test "Test del aspersor - Regar" {
+        game.addVisual(maizArriba)
+        aspersorPrueba.regar(game.at(5,5))
+        assert.equals(adult, maizArriba.estado())
+    }
+    test "Test del aspersor - Regar Limitrofes" {
+        game.addVisual(maizArribaIzquierda)
+        game.addVisual(maizArriba)
+        game.addVisual(maizArribaDerecha)
+        game.addVisual(maizIzquierda)
+        game.addVisual(maizDerecha)
+        game.addVisual(maizAbajoIzquierda)
+        game.addVisual(maizAbajo)
+        game.addVisual(maizAbajoDerecha)
+        game.addVisual(aspersorPrueba)
+        aspersorPrueba.regarLimitrofes()
+        assert.equals(adult, maizArribaIzquierda.estado())
+        assert.equals(adult, maizArriba.estado())
+        assert.equals(adult, maizArribaDerecha.estado())
+        assert.equals(adult, maizIzquierda.estado())
+        assert.equals(adult, maizDerecha.estado())
+        assert.equals(adult, maizAbajoIzquierda.estado())
+        assert.equals(adult, maizAbajo.estado())
+        assert.equals(adult, maizAbajoDerecha.estado())
     }
 }

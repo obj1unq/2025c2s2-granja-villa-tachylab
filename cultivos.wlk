@@ -2,13 +2,13 @@ import wollok.game.*
 import personaje.*
 //Cultivos y factories
 object cultivos {
-	//Atributos y Variables
+	//Atributos
 	const enLaGranja = #{}
-	method crearCultivo(factory) {
-		return factory.crear()
+	method crearCultivo(cultivo) {
+		return cultivo.crear()
 	}
-	method sembrarCultivo(factory) {
-		const nuevoCultivo = self.crearCultivo(factory)
+	method sembrarCultivo(cultivo) {
+		const nuevoCultivo = self.crearCultivo(cultivo)
 		game.addVisual(nuevoCultivo)
 		enLaGranja.add(nuevoCultivo)
 	}
@@ -17,21 +17,19 @@ object cultivos {
 	}
 }
 
-object maizFactory {
+object maiz {
 	method crear() {
 		return new Maiz(position = hector.position())
 	}
 }
 
-
-
-object trigoFactory {
+object trigo {
 	method crear() {
 		return new Trigo(position = hector.position()) 
 	}
 }
 
-object tomacoFactory {
+object tomaco {
 	method crear() {
 		return new Tomaco(position = hector.position())
 	}
@@ -40,7 +38,7 @@ object tomacoFactory {
 
 //Cultivos en si
 class Maiz {
-	//Atributos y Variables
+	//Atributos
 	var estado = baby
 	const position
 	const precio = 150
@@ -81,7 +79,7 @@ class Maiz {
 }
 
 class Trigo {
-	//Atributos y Variables
+	//Atributos
 	var etapa = 0
 	const position
 	//Posición e imagen
@@ -124,7 +122,7 @@ class Trigo {
 }
 
 class Tomaco {
-	//Atributos y Variables
+	//Atributos
 	var position
 	const precio = 80
 	//Posicion e imagen

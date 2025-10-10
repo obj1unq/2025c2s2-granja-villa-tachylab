@@ -1,10 +1,10 @@
 import wollok.game.*
 import cultivos.*
-
+import aspersorYPosiciones.*
 
 
 object hector {
-	//Atributos y Variables
+	//Atributos
 	var property position = game.center()
 	const property image = "mplayer.png"
 	const plantasCosechadas = #{}
@@ -16,6 +16,9 @@ object hector {
 	//Validaciones y condiciones
 	method esUnaParcelaVacia() {
 		return game.colliders(self).isEmpty()
+	}
+	method eresUnCultivo() {
+		return false
 	}
 	method hayUnCultivoAca() {
 		return not self.esUnaParcelaVacia() and game.uniqueCollider(self).eresUnCultivo()
@@ -35,6 +38,11 @@ object hector {
 			self.error("No hay un cultivo que cosechar")
 		}
 	}
+	method validarColocarAspersor() {
+		if (not self.esUnaParcelaVacia()) {
+			self.error("No se puede colocar aspersor, parcela ocupada")
+		}
+	}
 	//Mensajes
 	method mensajeOroActual() {
 		return "Tengo " + oroActual.toString() + " monedas"
@@ -43,9 +51,9 @@ object hector {
 		return plantasCosechadas.size().toString() + " plantas para vender."
 	}
 	//Metodos funcionales
-	method sembrar(factory) {
+	method sembrar(cultivo) {
 		self.validarSembrar()
-		cultivos.sembrarCultivo(factory)
+		cultivos.sembrarCultivo(cultivo)
 	}
 	method regar() {
 		self.validarRegar()
@@ -62,5 +70,9 @@ object hector {
 	}
 	method informarOroYPlantas() {
 		game.say(self, self.mensajeOroActual() + ", y  " + self.mensajePlantasCosechadas())
+	}
+	method colocarAspersor() {
+		self.validarColocarAspersor()
+		aspersores.establecerAspersor()
 	}
 	}

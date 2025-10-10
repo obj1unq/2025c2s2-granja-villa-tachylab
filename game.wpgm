@@ -1,6 +1,7 @@
 import wollok.game.*
 import personaje.*
 import cultivos.*
+import aspersorYPosiciones.*
 
 program farmville {
 	//  CONFIG	
@@ -11,16 +12,18 @@ program farmville {
 
 	//  VISUALES
 	game.addVisualCharacter(hector)
-	
 	//TECLAS DEL TECLADO
-	keyboard.t().onPressDo({hector.sembrar(trigoFactory)})
-	keyboard.m().onPressDo({hector.sembrar(maizFactory)})
-	keyboard.o().onPressDo({hector.sembrar(tomacoFactory)})
+	keyboard.t().onPressDo({hector.sembrar(trigo)})
+	keyboard.m().onPressDo({hector.sembrar(maiz)})
+	keyboard.o().onPressDo({hector.sembrar(tomaco)})
 	keyboard.r().onPressDo({hector.regar()})
 	keyboard.c().onPressDo({hector.cosechar()})
 	keyboard.v().onPressDo({hector.vender()})
 	keyboard.space().onPressDo({hector.informarOroYPlantas()})
-	
+	keyboard.a().onPressDo({hector.colocarAspersor()})
+
+	//EVENTOS
+	game.onTick(1000, "ActivarAspersores", {aspersores.activar()})
  	//  COMIENZA
 	game.start()
 }
