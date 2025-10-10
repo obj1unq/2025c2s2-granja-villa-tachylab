@@ -1,6 +1,8 @@
 import wollok.game.*
 import cultivos.*
 
+
+
 object hector {
 	//Atributos y Variables
 	var property position = game.center()
@@ -22,6 +24,11 @@ object hector {
 			self.error("No se puede regar, no hay un cultivo acá")
 		}
 	}
+	method validarCosechar() {
+		if (not self.hayUnCultivoAca()) {
+			self.error("No hay un cultivo que cosechar")
+		}
+	}
 	//Metodos funcionales
 	method sembrar(factory) {
 		self.validarSembrar()
@@ -30,5 +37,9 @@ object hector {
 	method regar() {
 		self.validarRegar()
 		game.uniqueCollider(self).regar()
+	}
+	method cosechar() {
+		self.validarCosechar()
+		game.uniqueCollider(self).cosechar()
 	}
 	}

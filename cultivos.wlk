@@ -11,6 +11,9 @@ object cultivos {
 		game.addVisual(nuevoCultivo)
 		enLaGranja.add(nuevoCultivo)
 	}
+	method sacarDeLaGranja(cultivo) {
+		enLaGranja.remove(cultivo)
+	}
 }
 
 object maizFactory {
@@ -50,11 +53,20 @@ class Maiz {
 	method estado() {
 		return estado
 	}
+	method eresUnCultivo() {
+		return true
+	}
+	method puedeCosecharse() {
+		return estado.sePuedeCosechar()
+	}
 	method regar() {
 		estado = estado.regado()
 	}
-	method eresUnCultivo() {
-		return true
+	method cosechar() {
+		if (self.puedeCosecharse()) {
+			cultivos.sacarDeLaGranja(self)
+			game.removeVisual(self)
+		}
 	}
 }
 
@@ -73,6 +85,12 @@ class Trigo {
 	method etapa() {
 		return etapa
 	}
+	method eresUnCultivo() {
+		return true
+	}
+	method puedeCosecharse() {
+		return etapa >= 2
+	}
 	method regar() {
 		if (etapa != 3) {
 			etapa += 1
@@ -81,8 +99,11 @@ class Trigo {
 			etapa = 0
 		}
 	}
-	method eresUnCultivo() {
-		return true
+	method cosechar() {
+		if (self.puedeCosecharse()) {
+			cultivos.sacarDeLaGranja(self)
+			game.removeVisual(self)
+		}
 	}
 }
 
@@ -100,6 +121,9 @@ class Tomaco {
 	method estoyEnBorde() {
 		return position.y() == game.height() - 1
 	}
+	method eresUnCultivo() {
+		return true
+	}
 	method regar() {
 		if (not self.estoyEnBorde()) {
 			position = position.up(1)
@@ -108,8 +132,9 @@ class Tomaco {
 			position = position.down(game.height() - 1)
 		}
 	}
-	method eresUnCultivo() {
-		return true
+	method cosechar() {
+			cultivos.sacarDeLaGranja(self)
+			game.removeVisual(self)
 	}
 }
 
@@ -121,6 +146,9 @@ object baby {
 	method regado() {
 		return adult
 	}
+	method sePuedeCosechar() {
+		return false
+	}
 }
 
 object adult {
@@ -129,5 +157,8 @@ object adult {
 	}
 	method regado() {
 		return self
+	}
+	method sePuedeCosechar() {
+		return true
 	}
 }

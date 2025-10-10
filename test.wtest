@@ -63,3 +63,36 @@ describe "Test del riego de cultivos"{
         assert.throwsException({ hector.regar() })
     }
 }
+
+describe "Test de la cosecha de cultivos" {
+    test "Test de cosecha: Maiz" {
+        hector.sembrar(maizFactory)
+        hector.cosechar()
+        assert.equals("Maiz", game.uniqueCollider(hector).nombre())
+        hector.regar()
+        hector.cosechar()
+        assert.that(game.colliders(hector).isEmpty())
+    }
+
+    test "Test de cosecha: Trigo" {
+        hector.sembrar(trigoFactory)
+        hector.cosechar()
+        assert.equals("Trigo", game.uniqueCollider(hector).nombre())
+        hector.regar()
+        hector.cosechar()
+        assert.equals("Trigo", game.uniqueCollider(hector).nombre())
+        hector.regar()
+        hector.cosechar()
+        assert.that(game.colliders(hector).isEmpty())
+    }
+
+    test "Test de cosecha: Tomaco" {
+        hector.sembrar(tomacoFactory)
+        hector.cosechar()
+        assert.that(game.colliders(hector).isEmpty())
+    }
+
+    test "Test de cosecha: No hay cultivo" {
+        assert.throwsException({ hector.cosechar() })
+    }
+}

@@ -11,13 +11,13 @@ program farmville {
 
 	//  VISUALES
 	game.addVisualCharacter(hector)
-	game.addVisual(new Trigo(position = game.at(1,1)))
 	
 	//TECLAS DEL TECLADO
 	keyboard.t().onPressDo({hector.sembrar(trigoFactory)})
 	keyboard.m().onPressDo({hector.sembrar(maizFactory)})
 	keyboard.o().onPressDo({hector.sembrar(tomacoFactory)})
 	keyboard.r().onPressDo({hector.regar()})
+	keyboard.c().onPressDo({hector.cosechar()})
 
  	//  COMIENZA
 	game.start()
