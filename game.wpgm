@@ -17,6 +17,7 @@ program farmville {
 	keyboard.t().onPressDo({hector.sembrar(trigoFactory)})
 	keyboard.m().onPressDo({hector.sembrar(maizFactory)})
 	keyboard.o().onPressDo({hector.sembrar(tomacoFactory)})
+	keyboard.r().onPressDo({hector.regar()})
 
  	//  COMIENZA
 	game.start()

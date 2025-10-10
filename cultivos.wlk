@@ -47,6 +47,9 @@ class Maiz {
 	method regar() {
 		estado = estado.regado()
 	}
+	method eresUnCultivo() {
+		return true
+	}
 }
 
 class Trigo {
@@ -66,15 +69,32 @@ class Trigo {
 			etapa = 0
 		}
 	}
+	method eresUnCultivo() {
+		return true
+	}
 }
 
 class Tomaco {
-	const position
+	var position
 	method position() {
 		return position
 	}
 	method image() {
 		return "tomaco.png"
+	}
+	method estoyEnBorde() {
+		return position.y() == game.height() - 1
+	}
+	method regar() {
+		if (not self.estoyEnBorde()) {
+			position = position.up(1)
+		}
+		else {
+			position = position.down(game.height() - 1)
+		}
+	}
+	method eresUnCultivo() {
+		return true
 	}
 }
 
@@ -90,7 +110,7 @@ object baby {
 
 object adult {
 	method nombre() {
-		return "baby"
+		return "adult"
 	}
 	method regado() {
 		return self
