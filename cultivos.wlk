@@ -44,6 +44,12 @@ class Maiz {
 	method image() {
 		return "corn_" + estado.nombre() + ".png"
 	}
+	method nombre() {
+		return "Maiz"
+	}
+	method estado() {
+		return estado
+	}
 	method regar() {
 		estado = estado.regado()
 	}
@@ -60,6 +66,12 @@ class Trigo {
 	}
 	method image() {
 		return "wheat_" + etapa.toString() + ".png"
+	}
+	method nombre() {
+		return "Trigo"
+	}
+	method etapa() {
+		return etapa
 	}
 	method regar() {
 		if (etapa != 3) {
@@ -81,6 +93,9 @@ class Tomaco {
 	}
 	method image() {
 		return "tomaco.png"
+	}
+	method nombre(){
+		return "Tomaco"
 	}
 	method estoyEnBorde() {
 		return position.y() == game.height() - 1

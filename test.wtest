@@ -1,2 +1,65 @@
 import personaje.*
 import cultivos.*
+import wollok.game.*
+
+describe "Test de la siembra de cultivos" {
+    test "Testeo de la siembra: Maiz" {
+        hector.sembrar(maizFactory)
+        assert.equals("Maiz", game.uniqueCollider(hector).nombre())
+    }
+
+    test "Testeo de la siembra: Trigo" {
+        hector.sembrar(trigoFactory)
+        assert.equals("Trigo", game.uniqueCollider(hector).nombre())
+    }
+
+    test "Testeo de la siembra: Tomaco" {
+        hector.sembrar(tomacoFactory)
+        assert.equals("Tomaco", game.uniqueCollider(hector).nombre())
+    }
+
+    test "Testeo de la siembra: No se puede sembrar" {
+        hector.sembrar(maizFactory)
+        assert.throwsException({hector.sembrar(maizFactory)})
+    }
+}
+
+describe "Test del riego de cultivos"{
+    test "Test de riego: Maiz" {
+        hector.sembrar(maizFactory)
+        hector.regar()
+        assert.equals(adult, game.uniqueCollider(hector).estado())
+        hector.regar()
+        assert.equals(adult, game.uniqueCollider(hector).estado())
+    }
+
+    test "Test de riego: Trigo" {
+        hector.sembrar(trigoFactory)
+        hector.regar()
+        assert.equals(1, game.uniqueCollider(hector).etapa())
+        hector.regar()
+        assert.equals(2, game.uniqueCollider(hector).etapa())
+        hector.regar()
+        assert.equals(3, game.uniqueCollider(hector).etapa())
+        hector.regar()
+        assert.equals(0, game.uniqueCollider(hector).etapa())
+    }
+    
+    test "Test de riego: Tomaco" {
+        hector.sembrar(tomacoFactory)
+        hector.regar()
+        hector.position(hector.position().up(1))
+        assert.throwsException({ hector.sembrar(tomacoFactory) })
+    }
+
+    test "Test de riego: Tomaco caso limite" {
+        hector.position(game.at(0,game.height() - 1))
+        hector.sembrar(tomacoFactory)
+        hector.regar()
+        hector.position(game.at(0,0))
+        assert.throwsException({ hector.sembrar(tomacoFactory) })
+    }
+    test "Test de riego: No hay cultivo" {
+        assert.throwsException({ hector.regar() })
+    }
+}
