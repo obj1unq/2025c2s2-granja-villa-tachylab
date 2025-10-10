@@ -10,9 +10,14 @@ program farmville {
 	game.ground("ground.png")
 
 	//  VISUALES
- 	game.addVisualCharacter(personaje)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
- 	
+	game.addVisualCharacter(hector)
+	game.addVisual(new Trigo(position = game.at(1,1)))
+	
+	//TECLAS DEL TECLADO
+	keyboard.t().onPressDo({hector.sembrar(trigoFactory)})
+	keyboard.m().onPressDo({hector.sembrar(maizFactory)})
+	keyboard.o().onPressDo({hector.sembrar(tomacoFactory)})
+
  	//  COMIENZA
 	game.start()
 }
