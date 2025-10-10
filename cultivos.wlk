@@ -2,6 +2,7 @@ import wollok.game.*
 import personaje.*
 //Cultivos y factories
 object cultivos {
+	//Atributos y Variables
 	const enLaGranja = #{}
 	method crearCultivo(factory) {
 		return factory.crear()
@@ -39,26 +40,35 @@ object tomacoFactory {
 
 //Cultivos en si
 class Maiz {
+	//Atributos y Variables
 	var estado = baby
 	const position
+	const precio = 150
+	//Posición e imagen
 	method position() {
 		return position
 	}
 	method image() {
 		return "corn_" + estado.nombre() + ".png"
 	}
+	//Metodos Lookup y de consulta simple
 	method nombre() {
 		return "Maiz"
 	}
 	method estado() {
 		return estado
 	}
+	method precio() {
+		return precio
+	}
+	//Condiciones
 	method eresUnCultivo() {
 		return true
 	}
 	method puedeCosecharse() {
 		return estado.sePuedeCosechar()
 	}
+	//Metodos funcionales
 	method regar() {
 		estado = estado.regado()
 	}
@@ -71,14 +81,17 @@ class Maiz {
 }
 
 class Trigo {
+	//Atributos y Variables
 	var etapa = 0
 	const position
+	//Posición e imagen
 	method position() {
 		return position
 	}
 	method image() {
 		return "wheat_" + etapa.toString() + ".png"
 	}
+	//Metodos Lookup y de consulta simple
 	method nombre() {
 		return "Trigo"
 	}
@@ -105,25 +118,37 @@ class Trigo {
 			game.removeVisual(self)
 		}
 	}
+	method precio() {
+		return (etapa - 1) * 100
+	}
 }
 
 class Tomaco {
+	//Atributos y Variables
 	var position
+	const precio = 80
+	//Posicion e imagen
 	method position() {
 		return position
 	}
 	method image() {
 		return "tomaco.png"
 	}
+	//Metodos Lookup
 	method nombre(){
 		return "Tomaco"
 	}
+	method precio() {
+		return precio
+	}
+	//Validaciones y condiciones
 	method estoyEnBorde() {
 		return position.y() == game.height() - 1
 	}
 	method eresUnCultivo() {
 		return true
 	}
+	//Metodos funcionales
 	method regar() {
 		if (not self.estoyEnBorde()) {
 			position = position.up(1)
