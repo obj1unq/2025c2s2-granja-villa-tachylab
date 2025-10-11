@@ -20,7 +20,7 @@ object aspersores {
 
 object aspersorFactory {
     method crear() {
-        return new Aspersor(position = hector.position())
+        return new Aspersor(position = personaje.position())
     }
 }
 
@@ -59,6 +59,9 @@ class Aspersor {
         return not self.esUnaParcelaVacia(posicionVerificar) and self.esUnCultivoLoQueHayEn(posicionVerificar)
     }
     method eresUnCultivo() {
+        return false
+    }
+    method eresUnMercado() {
         return false
     }
     //Metodos funcionales

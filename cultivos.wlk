@@ -4,6 +4,7 @@ import personaje.*
 object cultivos {
 	//Atributos
 	const enLaGranja = #{}
+	//Metodos funcionales
 	method crearCultivo(cultivo) {
 		return cultivo.crear()
 	}
@@ -19,19 +20,19 @@ object cultivos {
 
 object maiz {
 	method crear() {
-		return new Maiz(position = hector.position())
+		return new Maiz(position = personaje.position())
 	}
 }
 
 object trigo {
 	method crear() {
-		return new Trigo(position = hector.position()) 
+		return new Trigo(position = personaje.position()) 
 	}
 }
 
 object tomaco {
 	method crear() {
-		return new Tomaco(position = hector.position())
+		return new Tomaco(position = personaje.position())
 	}
 }
 
@@ -63,6 +64,9 @@ class Maiz {
 	method eresUnCultivo() {
 		return true
 	}
+    method eresUnMercado() {
+        return false
+    }
 	method puedeCosecharse() {
 		return estado.sePuedeCosechar()
 	}
@@ -96,12 +100,17 @@ class Trigo {
 	method etapa() {
 		return etapa
 	}
+	//Condiciones
 	method eresUnCultivo() {
 		return true
 	}
+    method eresUnMercado() {
+        return false
+    }
 	method puedeCosecharse() {
 		return etapa >= 2
 	}
+	//Metodos funcionales
 	method regar() {
 		if (etapa != 3) {
 			etapa += 1
@@ -146,6 +155,9 @@ class Tomaco {
 	method eresUnCultivo() {
 		return true
 	}
+    method eresUnMercado() {
+        return false
+    }
 	//Metodos funcionales
 	method regar() {
 		if (not self.estoyEnBorde()) {

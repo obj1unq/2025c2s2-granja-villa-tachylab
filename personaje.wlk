@@ -3,7 +3,7 @@ import cultivos.*
 import aspersorYPosiciones.*
 
 
-object hector {
+object personaje {
 	//Atributos
 	var property position = game.center()
 	const property image = "mplayer.png"
@@ -13,6 +13,15 @@ object hector {
 	method oroTotalPlantasCosechadas() {
 		return plantasCosechadas.sum({ planta => planta.precio()})
 	}
+	method elementoUnicoActual() {
+		return game.uniqueCollider(self)
+	}
+	method oroActual() {
+		return oroActual
+	}
+	method plantasCosechadas() {
+		return plantasCosechadas
+	}
 	//Validaciones y condiciones
 	method esUnaParcelaVacia() {
 		return game.colliders(self).isEmpty()
@@ -21,7 +30,13 @@ object hector {
 		return false
 	}
 	method hayUnCultivoAca() {
-		return not self.esUnaParcelaVacia() and game.uniqueCollider(self).eresUnCultivo()
+		return not self.esUnaParcelaVacia() and self.elementoUnicoActual().eresUnCultivo()
+	}
+	method hayUnMercadoAca() {
+		return not self.esUnaParcelaVacia() and self.elementoUnicoActual().eresUnMercado()
+	}
+	method elMercadoPuedeComprar() {
+		return self.elementoUnicoActual().monedas() >= self.oroTotalPlantasCosechadas()
 	}
 	method validarSembrar() {
 		if (not self.esUnaParcelaVacia()) {
@@ -41,6 +56,14 @@ object hector {
 	method validarColocarAspersor() {
 		if (not self.esUnaParcelaVacia()) {
 			self.error("No se puede colocar aspersor, parcela ocupada")
+		}
+	}
+	method validarVender() {
+		if (not self.hayUnMercadoAca()) {
+			self.error("No se puede vender, no hay mercado")
+		}
+		else if (not self.elMercadoPuedeComprar()){
+			self.error("El mercado no tiene monedas suficientes")
 		}
 	}
 	//Mensajes
@@ -65,7 +88,9 @@ object hector {
 		game.uniqueCollider(self).cosechar()
 	}
 	method vender() {
+		self.validarVender()
 		oroActual += self.oroTotalPlantasCosechadas()
+		self.elementoUnicoActual().comprarCosechas(plantasCosechadas)
 		plantasCosechadas.clear()
 	}
 	method informarOroYPlantas() {
