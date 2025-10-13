@@ -97,6 +97,13 @@ describe "Test de la cosecha de cultivos" {
     test "Test de cosecha: No hay cultivo" {
         assert.throwsException({ personaje.cosechar() })
     }
+
+    test "Test de cosecha: La planta no puede cosecharse" {
+        personaje.sembrar(trigo)
+        personaje.cosechar()
+        assert.notThat(game.colliders(personaje).isEmpty())
+        assert.equals(0, personaje.plantasCosechadas().size())
+    }
 }
 
 describe "Test de la venta de cultivos y los mercados" {
