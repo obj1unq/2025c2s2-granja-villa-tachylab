@@ -76,7 +76,7 @@ object personaje {
 	//Metodos funcionales
 	method sembrar(cultivo) {
 		self.validarSembrar()
-		cultivos.sembrarCultivo(cultivo)
+		cultivos.sembrarCultivo(cultivo, self)
 	}
 	method regar() {
 		self.validarRegar()

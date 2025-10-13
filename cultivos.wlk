@@ -5,11 +5,11 @@ object cultivos {
 	//Atributos
 	const enLaGranja = #{}
 	//Metodos funcionales
-	method crearCultivo(cultivo) {
-		return cultivo.crear()
+	method crearCultivo(cultivo, cultivador) {
+		return cultivo.crear(cultivador)
 	}
-	method sembrarCultivo(cultivo) {
-		const nuevoCultivo = self.crearCultivo(cultivo)
+	method sembrarCultivo(cultivo, cultivador) {
+		const nuevoCultivo = self.crearCultivo(cultivo, cultivador)
 		game.addVisual(nuevoCultivo)
 		enLaGranja.add(nuevoCultivo)
 	}
@@ -19,20 +19,20 @@ object cultivos {
 }
 
 object maiz {
-	method crear() {
-		return new Maiz(position = personaje.position())
+	method crear(cultivador) {
+		return new Maiz(position = cultivador.position())
 	}
 }
 
 object trigo {
-	method crear() {
-		return new Trigo(position = personaje.position()) 
+	method crear(cultivador) {
+		return new Trigo(position = cultivador.position()) 
 	}
 }
 
 object tomaco {
-	method crear() {
-		return new Tomaco(position = personaje.position())
+	method crear(cultivador) {
+		return new Tomaco(position = cultivador.position())
 	}
 }
 
