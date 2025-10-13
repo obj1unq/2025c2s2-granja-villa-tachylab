@@ -3026,3 +3026,26 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":176,"timestamp":"2025-10-10T13:49:02.212Z"}
 {"level":"info","message":"⌛ Building environment","timeElapsed":103,"timestamp":"2025-10-10T13:49:02.322Z"}
 {"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on c:\\Users\\Usuario\\Desktop\\Uni\\Programación con Objetos I\\2025c2s2-granja-villa-tachylab","timeElapsed":1031754,"timestamp":"2025-10-10T13:59:05.088Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":149,"timestamp":"2025-10-13T12:23:55.957Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":126,"timestamp":"2025-10-13T12:23:56.310Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":177,"timestamp":"2025-10-13T12:23:56.748Z"}
+{"level":"info","message":"⌛ Validating mercados.wlk","timeElapsed":145,"timestamp":"2025-10-13T12:24:14.068Z"}
+{"level":"info","message":"⌛ Validating mercados.wlk","timeElapsed":134,"timestamp":"2025-10-13T12:24:22.718Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":139,"timestamp":"2025-10-13T12:27:12.775Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":111,"timestamp":"2025-10-13T12:27:13.210Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":105,"timestamp":"2025-10-13T12:27:13.396Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":173,"timestamp":"2025-10-13T12:27:13.570Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":287,"timestamp":"2025-10-13T12:27:35.642Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":126,"timestamp":"2025-10-13T12:27:35.770Z"}
+{"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":124,"timestamp":"2025-10-13T12:27:35.896Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.farmville\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/home/publico/Documentos/Programación con Objetos I/2025c2s2-granja-villa-tachylab\u001b[39m\u001b[23m","ok":true,"timeElapsed":461,"timestamp":"2025-10-13T12:27:46.965Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":103,"timestamp":"2025-10-13T12:28:38.560Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":146,"timestamp":"2025-10-13T12:30:58.274Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":114,"timestamp":"2025-10-13T12:30:58.449Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":116,"timestamp":"2025-10-13T12:30:59.462Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":104,"timestamp":"2025-10-13T12:30:59.649Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":103,"timestamp":"2025-10-13T12:31:00.087Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":105,"timestamp":"2025-10-13T12:31:03.384Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":123,"timestamp":"2025-10-13T12:31:37.605Z"}
+{"level":"error","message":"✘ Completions for node Send ([87:3, 87:77] - personaje.wlk) failed: Error: [Send]{5aa66c} at personaje.wlk:87 exhausted all cases without a match [Send]{5aa66c} at personaje.wlk:87 exhausted all cases without a match","stack":"Error: [Send]{5aa66c} at personaje.wlk:87 exhausted all cases without a match\n    at /home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:38:6142\n    at D2 (/home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:2384:42)\n    at /home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:2384:2988\n    at /home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:2393:8440\n    at /home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:37:74872\n    at Ye (/home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:7:8527)\n    at qt (/home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:7:6189)\n    at ot (/home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:7:6378)\n    at Immediate._onImmediate (/home/publico/.var/app/com.visualstudio.code/data/vscode/extensions/uqbar.wollok-lsp-ide-0.5.3/out/server/src/server.js:7:6142)\n    at process.processImmediate (node:internal/timers:485:21)","timestamp":"2025-10-13T12:31:37.644Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on /home/publico/Documentos/Programación con Objetos I/2025c2s2-granja-villa-tachylab","timeElapsed":485049,"timestamp":"2025-10-13T12:35:51.553Z"}

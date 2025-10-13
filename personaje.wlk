@@ -84,7 +84,7 @@ object personaje {
 	}
 	method cosechar() {
 		self.validarCosechar()
-		plantasCosechadas.add(game.uniqueCollider(self))
+		plantasCosechadas.addAll(game.uniqueCollider(self).plantaDeEstarCosechada())
 		game.uniqueCollider(self).cosechar()
 	}
 	method vender() {

@@ -80,6 +80,14 @@ class Maiz {
 			game.removeVisual(self)
 		}
 	}
+	method plantaDeEstarCosechada() {
+		if (self.puedeCosecharse()) {
+			return #{self}
+		}
+		else {
+			return #{}
+		}
+	}
 }
 
 class Trigo {
@@ -123,6 +131,14 @@ class Trigo {
 		if (self.puedeCosecharse()) {
 			cultivos.sacarDeLaGranja(self)
 			game.removeVisual(self)
+		}
+	}
+	method plantaDeEstarCosechada() {
+		if (self.puedeCosecharse()) {
+			return #{self}
+		}
+		else {
+			return #{}
 		}
 	}
 	method precio() {
@@ -171,8 +187,10 @@ class Tomaco {
 			cultivos.sacarDeLaGranja(self)
 			game.removeVisual(self)
 	}
+	method plantaDeEstarCosechada() {
+		return self
+	}
 }
-
 //Estados extra de los cultivos
 object baby {
 	method nombre() {
