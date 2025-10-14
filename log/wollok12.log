@@ -644,3 +644,17 @@
 {"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":127,"timestamp":"2025-10-13T12:49:05.711Z"}
 {"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on /home/publico/Documentos/Programación con Objetos I/2025c2s2-granja-villa-tachylab","timeElapsed":627800,"timestamp":"2025-10-13T12:49:07.068Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.farmville\u001b[39m\u001b[23m on \u001b[3m\u001b[34m/home/publico/Documentos/Programación con Objetos I/2025c2s2-granja-villa-tachylab\u001b[39m\u001b[23m","ok":true,"timeElapsed":602,"timestamp":"2025-10-13T12:49:09.056Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":174,"timestamp":"2025-10-14T01:36:13.237Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":125,"timestamp":"2025-10-14T01:36:13.365Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":300,"timestamp":"2025-10-14T01:36:13.669Z"}
+{"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":153,"timestamp":"2025-10-14T01:36:13.922Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":189,"timestamp":"2025-10-14T01:36:14.117Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":132,"timestamp":"2025-10-14T01:36:14.274Z"}
+{"level":"info","message":"⌛ Validating test.wtest","timeElapsed":132,"timestamp":"2025-10-14T01:36:14.628Z"}
+{"level":"info","message":"⌛ Validating personaje.wlk","timeElapsed":130,"timestamp":"2025-10-14T01:36:14.759Z"}
+{"level":"info","message":"⌛ Validating game.wpgm","timeElapsed":125,"timestamp":"2025-10-14T01:36:14.887Z"}
+{"level":"info","message":"⌛ Validating mercados.wlk","timeElapsed":115,"timestamp":"2025-10-14T01:36:15.211Z"}
+{"level":"info","message":"⌛ Validating cultivos.wlk","timeElapsed":128,"timestamp":"2025-10-14T01:36:15.340Z"}
+{"level":"info","message":"⌛ Validating aspersorYPosiciones.wlk","timeElapsed":117,"timestamp":"2025-10-14T01:36:15.457Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.farmville\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Usuario\\Desktop\\Uni\\Programación con Objetos I\\2025c2s2-granja-villa-tachylab\u001b[39m\u001b[23m","ok":true,"timeElapsed":633,"timestamp":"2025-10-14T01:36:19.546Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.farmville on c:\\Users\\Usuario\\Desktop\\Uni\\Programación con Objetos I\\2025c2s2-granja-villa-tachylab","timeElapsed":142299,"timestamp":"2025-10-14T01:38:41.212Z"}

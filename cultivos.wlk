@@ -168,6 +168,20 @@ class Tomaco {
 	method estoyEnBorde() {
 		return position.y() == game.height() - 1
 	}
+	method arribaEsParcelaVacia() {
+		return game.getObjectsIn(position.up(1)).isEmpty()
+	}
+	method puedeCrecer() {
+		return not self.estoyEnBorde() and self.arribaEsParcelaVacia()
+	}
+	method nuevaPosicionCrecer() {
+		return if (self.estoyEnBorde()) {
+			position = game.at(position.x(), 0)
+		}
+		else {
+			position = position.up(1)
+		}
+	}
 	method eresUnCultivo() {
 		return true
 	}
@@ -176,11 +190,8 @@ class Tomaco {
     }
 	//Metodos funcionales
 	method regar() {
-		if (not self.estoyEnBorde()) {
-			position = position.up(1)
-		}
-		else {
-			position = position.down(game.height() - 1)
+		if (self.puedeCrecer()) {
+			position = self.nuevaPosicionCrecer()
 		}
 	}
 	method cosechar() {
