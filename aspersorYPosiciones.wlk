@@ -66,7 +66,7 @@ class Aspersor {
     }
     //Metodos funcionales
     method regar(posicion){
-        if (self.hayUnCultivoEn(posicion)) {
+        if (not self.esUnaParcelaVacia(posicion)) {
             game.getObjectsIn(posicion).uniqueElement().regar()
         }
     }

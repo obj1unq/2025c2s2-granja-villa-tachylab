@@ -5,11 +5,11 @@ object cultivos {
 	//Atributos
 	const enLaGranja = #{}
 	//Metodos funcionales
-	method crearCultivo(cultivo, cultivador) {
-		return cultivo.crear(cultivador)
+	method crearCultivo(cultivo, granjero) {
+		return cultivo.crear(granjero)
 	}
-	method sembrarCultivo(cultivo, cultivador) {
-		const nuevoCultivo = self.crearCultivo(cultivo, cultivador)
+	method sembrarCultivo(cultivo, granjero) {
+		const nuevoCultivo = self.crearCultivo(cultivo, granjero)
 		game.addVisual(nuevoCultivo)
 		enLaGranja.add(nuevoCultivo)
 	}
@@ -19,20 +19,20 @@ object cultivos {
 }
 
 object maiz {
-	method crear(cultivador) {
-		return new Maiz(position = cultivador.position())
+	method crear(granjero) {
+		return new Maiz(position = granjero.position())
 	}
 }
 
 object trigo {
-	method crear(cultivador) {
-		return new Trigo(position = cultivador.position()) 
+	method crear(granjero) {
+		return new Trigo(position = granjero.position()) 
 	}
 }
 
 object tomaco {
-	method crear(cultivador) {
-		return new Tomaco(position = cultivador.position())
+	method crear(granjero) {
+		return new Tomaco(position = granjero.position())
 	}
 }
 
@@ -61,9 +61,6 @@ class Maiz {
 		return precio
 	}
 	//Condiciones
-	method eresUnCultivo() {
-		return true
-	}
     method eresUnMercado() {
         return false
     }
@@ -74,18 +71,11 @@ class Maiz {
 	method regar() {
 		estado = estado.regado()
 	}
-	method cosechar() {
+	method cosechar(granjero) {
 		if (self.puedeCosecharse()) {
 			cultivos.sacarDeLaGranja(self)
+			granjero.añadirCosecha(self)
 			game.removeVisual(self)
-		}
-	}
-	method plantaDeEstarCosechada() {
-		if (self.puedeCosecharse()) {
-			return #{self}
-		}
-		else {
-			return #{}
 		}
 	}
 }
@@ -109,9 +99,6 @@ class Trigo {
 		return etapa
 	}
 	//Condiciones
-	method eresUnCultivo() {
-		return true
-	}
     method eresUnMercado() {
         return false
     }
@@ -127,18 +114,11 @@ class Trigo {
 			etapa = 0
 		}
 	}
-	method cosechar() {
+	method cosechar(granjero) {
 		if (self.puedeCosecharse()) {
 			cultivos.sacarDeLaGranja(self)
+			granjero.añadirCosecha(self)
 			game.removeVisual(self)
-		}
-	}
-	method plantaDeEstarCosechada() {
-		if (self.puedeCosecharse()) {
-			return #{self}
-		}
-		else {
-			return #{}
 		}
 	}
 	method precio() {
@@ -172,7 +152,7 @@ class Tomaco {
 		return game.getObjectsIn(position.up(1)).isEmpty()
 	}
 	method puedeCrecer() {
-		return not self.arribaEsParcelaVacia()
+		return self.arribaEsParcelaVacia()
 	}
 	method nuevaPosicionCrecer() {
 		return if (self.estoyEnBorde()) {
@@ -181,9 +161,6 @@ class Tomaco {
 		else {
 			position.up(1)
 		}
-	}
-	method eresUnCultivo() {
-		return true
 	}
     method eresUnMercado() {
         return false
@@ -194,12 +171,10 @@ class Tomaco {
 			position = self.nuevaPosicionCrecer()
 		}
 	}
-	method cosechar() {
+	method cosechar(granjero) {
 		cultivos.sacarDeLaGranja(self)
+		granjero.añadirCosecha(self)
 		game.removeVisual(self)
-	}
-	method plantaDeEstarCosechada() {
-		return #{self}
 	}
 }
 //Estados extra de los cultivos

@@ -206,22 +206,6 @@ describe "Test del aspersor y su funcionamiento" {
         game.addVisual(maizDuplicado)
         assert.notThat(aspersorPrueba.hayElementoUnicoEn(game.at(5,5)))
     }
-
-    test "Test del aspersor - Verificaciones: Comprobar si el elemento unico es un cultivo en la posicion dada" {
-        game.addVisual(maizArriba)
-        assert.that(aspersorPrueba.esCultivoElElementoUnicoEn(game.at(5,5)))
-        game.addVisual(personaje)
-        personaje.position(game.at(0,0))
-        assert.notThat(aspersorPrueba.esCultivoElElementoUnicoEn(game.at(0,0)))
-    }
-
-    test "Test del aspersor - Verificaciones: Comprobar si hay un cultivo en la posicion dada" {
-        game.addVisual(maizArriba)
-        assert.that(aspersorPrueba.hayUnCultivoEn(game.at(5,5)))
-        game.removeVisual(maizArriba)
-        assert.notThat(aspersorPrueba.hayUnCultivoEn(game.at(5,5)))
-    }
-
     test "Test del aspersor - Regar" {
         game.addVisual(maizArriba)
         aspersorPrueba.regar(game.at(5,5))

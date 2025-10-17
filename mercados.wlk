@@ -27,6 +27,8 @@ class Mercado {
         return true
     }
     //Metodos funcionales
+    method regar() {}
+    method cosechar(granjero) {}
     method precioTotalCosechas(plantasAEvaluar) {
         return plantasAEvaluar.sum({plantas => plantas.precio()})
     }

@@ -29,9 +29,6 @@ object personaje {
 	method eresUnCultivo() {
 		return false
 	}
-	method hayUnCultivoAca() {
-		return not self.esUnaParcelaVacia() and self.elementoUnicoActual().eresUnCultivo()
-	}
 	method hayUnMercadoAca() {
 		return not self.esUnaParcelaVacia() and self.elementoUnicoActual().eresUnMercado()
 	}
@@ -44,12 +41,12 @@ object personaje {
 		}
 	}
 	method validarRegar() {
-		if (not self.hayUnCultivoAca()) {
-			self.error("No se puede regar, no hay un cultivo acá")
+		if (self.esUnaParcelaVacia()) {
+			self.error("No se puede regar, esta parcela esta vacia")
 		}
 	}
 	method validarCosechar() {
-		if (not self.hayUnCultivoAca()) {
+		if (self.esUnaParcelaVacia()) {
 			self.error("No hay un cultivo que cosechar")
 		}
 	}
@@ -84,8 +81,10 @@ object personaje {
 	}
 	method cosechar() {
 		self.validarCosechar()
-		plantasCosechadas.addAll(game.uniqueCollider(self).plantaDeEstarCosechada())
-		game.uniqueCollider(self).cosechar()
+		game.uniqueCollider(self).cosechar(self)
+	}
+	method añadirCosecha(cultivo) {
+		plantasCosechadas.add(cultivo)
 	}
 	method vender() {
 		self.validarVender()
