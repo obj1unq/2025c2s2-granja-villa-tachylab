@@ -61,9 +61,6 @@ class Maiz {
 		return precio
 	}
 	//Condiciones
-    method eresUnMercado() {
-        return false
-    }
 	method puedeCosecharse() {
 		return estado.sePuedeCosechar()
 	}
@@ -78,6 +75,7 @@ class Maiz {
 			game.removeVisual(self)
 		}
 	}
+	method comprarCosechas(plantasCosechadas, granjero) {}
 }
 
 class Trigo {
@@ -99,9 +97,6 @@ class Trigo {
 		return etapa
 	}
 	//Condiciones
-    method eresUnMercado() {
-        return false
-    }
 	method puedeCosecharse() {
 		return etapa >= 2
 	}
@@ -124,6 +119,7 @@ class Trigo {
 	method precio() {
 		return (etapa - 1) * 100
 	}
+	method comprarCosechas(plantasCosechadas, granjero) {}
 }
 
 class Tomaco {
@@ -162,9 +158,6 @@ class Tomaco {
 			position.up(1)
 		}
 	}
-    method eresUnMercado() {
-        return false
-    }
 	//Metodos funcionales
 	method regar() {
 		if (self.puedeCrecer()) {
@@ -176,6 +169,7 @@ class Tomaco {
 		granjero.añadirCosecha(self)
 		game.removeVisual(self)
 	}
+	method comprarCosechas(plantasCosechadas, granjero) {}
 }
 //Estados extra de los cultivos
 object baby {

@@ -154,7 +154,11 @@ describe "Test de la venta de cultivos y los mercados" {
         game.addVisual(personaje)
         personaje.position(game.at(0, 0))
         game.addVisual(mercadoPrueba)
-        assert.throwsException({ personaje.vender() })
+        personaje.vender()
+        assert.equals(0, personaje.oroActual())
+        assert.notThat(personaje.plantasCosechadas().isEmpty())
+        assert.equals(80, mercadoPrueba.monedas())
+        assert.that(mercadoPrueba.mercaderia().isEmpty())
     }
 
     test "Test de la venta y el mercado: Venta exitosa" {

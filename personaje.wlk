@@ -26,9 +26,6 @@ object personaje {
 	method esUnaParcelaVacia() {
 		return game.colliders(self).isEmpty()
 	}
-	method eresUnCultivo() {
-		return false
-	}
 	method hayUnMercadoAca() {
 		return not self.esUnaParcelaVacia() and self.elementoUnicoActual().eresUnMercado()
 	}
@@ -56,11 +53,8 @@ object personaje {
 		}
 	}
 	method validarVender() {
-		if (not self.hayUnMercadoAca()) {
-			self.error("No se puede vender, no hay mercado")
-		}
-		else if (not self.elMercadoPuedeComprar()){
-			self.error("El mercado no tiene monedas suficientes")
+		if (self.esUnaParcelaVacia()) {
+			self.error("No se puede vender, parcela vacia")
 		}
 	}
 	//Mensajes
@@ -77,19 +71,21 @@ object personaje {
 	}
 	method regar() {
 		self.validarRegar()
-		game.uniqueCollider(self).regar()
+		self.elementoUnicoActual().regar()
 	}
 	method cosechar() {
 		self.validarCosechar()
-		game.uniqueCollider(self).cosechar(self)
+		self.elementoUnicoActual().cosechar(self)
 	}
 	method añadirCosecha(cultivo) {
 		plantasCosechadas.add(cultivo)
 	}
 	method vender() {
 		self.validarVender()
+		self.elementoUnicoActual().comprarCosechas(plantasCosechadas, self)
+	}
+	method ventaExitosa() {
 		oroActual += self.oroTotalPlantasCosechadas()
-		self.elementoUnicoActual().comprarCosechas(plantasCosechadas)
 		plantasCosechadas.clear()
 	}
 	method informarOroYPlantas() {

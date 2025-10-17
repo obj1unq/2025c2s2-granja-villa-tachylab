@@ -20,11 +20,8 @@ class Mercado {
         return mercaderia
     }
     //Condiciones
-    method eresUnCultivo() {
-        return false
-    }
-    method eresUnMercado() {
-        return true
+    method tengoMonedasSuficientes(plantasAComprar) {
+        return self.precioTotalCosechas(plantasAComprar) <= monedas
     }
     //Metodos funcionales
     method regar() {}
@@ -32,8 +29,11 @@ class Mercado {
     method precioTotalCosechas(plantasAEvaluar) {
         return plantasAEvaluar.sum({plantas => plantas.precio()})
     }
-    method comprarCosechas(plantasAComprar) {
-        mercaderia.addAll(plantasAComprar)
-        monedas -= self.precioTotalCosechas(plantasAComprar)
+    method comprarCosechas(plantasAComprar, granjero) {
+        if (self.tengoMonedasSuficientes(plantasAComprar)) {
+            mercaderia.addAll(plantasAComprar)
+            monedas -= self.precioTotalCosechas(plantasAComprar)
+            granjero.ventaExitosa()
+        }
     }
 }

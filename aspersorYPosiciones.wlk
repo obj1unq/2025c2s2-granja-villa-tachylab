@@ -47,33 +47,19 @@ class Aspersor {
         return game.getObjectsIn(posicionVerificar).uniqueElement()
     }
     method hayElementoUnicoEn(posicionVerificar) {
-        return game.getObjectsIn(posicionVerificar).size() == 1
-    }
-    method esCultivoElElementoUnicoEn(posicionVerificar) {
-        return self.elementoUnicoEn(posicionVerificar).eresUnCultivo()
-    }
-    method esUnCultivoLoQueHayEn(posicionVerificar) {
-        return self.hayElementoUnicoEn(posicionVerificar) and self.esCultivoElElementoUnicoEn(posicionVerificar)
-    }
-    method hayUnCultivoEn(posicionVerificar) {
-        return not self.esUnaParcelaVacia(posicionVerificar) and self.esUnCultivoLoQueHayEn(posicionVerificar)
-    }
-    method eresUnCultivo() {
-        return false
-    }
-    method eresUnMercado() {
-        return false
+        return not self.esUnaParcelaVacia(posicionVerificar) and game.getObjectsIn(posicionVerificar).size() == 1
     }
     //Metodos funcionales
     method regar(posicion){
-        if (not self.esUnaParcelaVacia(posicion)) {
-            game.getObjectsIn(posicion).uniqueElement().regar()
+        if (self.hayElementoUnicoEn(posicion)) {
+            self.elementoUnicoEn(posicion).regar()
         }
     }
     method regarLimitrofes() {
         const posicionesLimitrofes = self.posicionesChequeables()
         posicionesLimitrofes.forEach({posicion => self.regar(posicion)})
     }
+    method comprarCosechas(plantasCosechadas, granjero) {}
 }
 
 object arriba {
