@@ -172,14 +172,14 @@ class Tomaco {
 		return game.getObjectsIn(position.up(1)).isEmpty()
 	}
 	method puedeCrecer() {
-		return not self.estoyEnBorde() and self.arribaEsParcelaVacia()
+		return not self.arribaEsParcelaVacia()
 	}
 	method nuevaPosicionCrecer() {
 		return if (self.estoyEnBorde()) {
-			position = game.at(position.x(), 0)
+			game.at(position.x(), 0)
 		}
 		else {
-			position = position.up(1)
+			position.up(1)
 		}
 	}
 	method eresUnCultivo() {
@@ -195,11 +195,11 @@ class Tomaco {
 		}
 	}
 	method cosechar() {
-			cultivos.sacarDeLaGranja(self)
-			game.removeVisual(self)
+		cultivos.sacarDeLaGranja(self)
+		game.removeVisual(self)
 	}
 	method plantaDeEstarCosechada() {
-		return self
+		return #{self}
 	}
 }
 //Estados extra de los cultivos
