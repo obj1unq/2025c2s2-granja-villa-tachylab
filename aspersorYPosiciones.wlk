@@ -51,7 +51,7 @@ class Aspersor {
     }
     method validarRegar(posicion) {
         if (not self.hayElementoUnicoEn(posicion)) {
-            self.error("No hay cultivo que regar")
+            self.error("No es posible regar")
         }
     }
     //Metodos funcionales
