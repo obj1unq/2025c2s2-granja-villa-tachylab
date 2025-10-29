@@ -2,7 +2,7 @@ import wollok.game.*
 import personaje.*
 
 
-object aspersores {
+object gestorDeAspersores {
     const aspersoresActivos = #{}
 
     method activar() {
@@ -49,12 +49,18 @@ class Aspersor {
     method hayElementoUnicoEn(posicionVerificar) {
         return not self.esUnaParcelaVacia(posicionVerificar) and game.getObjectsIn(posicionVerificar).size() == 1
     }
-    //Metodos funcionales
-    method regar(posicion){
-        if (self.hayElementoUnicoEn(posicion)) {
-            self.elementoUnicoEn(posicion).regar()
+    method validarRegar(posicion) {
+        if (not self.hayElementoUnicoEn(posicion)) {
+            self.error("No hay cultivo que regar")
         }
     }
+    //Metodos funcionales
+    method regar(posicion){
+            self.validarRegar(posicion)
+            self.elementoUnicoEn(posicion).regar()
+        
+    }
+    method regar() {}
     method regarLimitrofes() {
         const posicionesLimitrofes = self.posicionesChequeables()
         posicionesLimitrofes.forEach({posicion => self.regar(posicion)})

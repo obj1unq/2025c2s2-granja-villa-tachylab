@@ -19,9 +19,14 @@ class Mercado {
     method mercaderia() {
         return mercaderia
     }
-    //Condiciones
+    //Condiciones y validaciones
     method tengoMonedasSuficientes(plantasAComprar) {
         return self.precioTotalCosechas(plantasAComprar) <= monedas
+    }
+    method validarComprarCosechas(plantasAComprar) {
+        if (not self.tengoMonedasSuficientes(plantasAComprar)) {
+            self.error("No tengo monedas suficientes para comprar tus plantas")
+        }
     }
     //Metodos funcionales
     method regar() {}
@@ -30,10 +35,9 @@ class Mercado {
         return plantasAEvaluar.sum({plantas => plantas.precio()})
     }
     method comprarCosechas(plantasAComprar, granjero) {
-        if (self.tengoMonedasSuficientes(plantasAComprar)) {
+            self.validarComprarCosechas(plantasAComprar)
             mercaderia.addAll(plantasAComprar)
             monedas -= self.precioTotalCosechas(plantasAComprar)
             granjero.ventaExitosa()
-        }
     }
 }

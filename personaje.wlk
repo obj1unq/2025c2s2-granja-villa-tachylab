@@ -67,7 +67,7 @@ object personaje {
 	//Metodos funcionales
 	method sembrar(cultivo) {
 		self.validarSembrar()
-		cultivos.sembrarCultivo(cultivo, self)
+		gestorDeCultivos.sembrarCultivo(cultivo, self)
 	}
 	method regar() {
 		self.validarRegar()
@@ -93,6 +93,6 @@ object personaje {
 	}
 	method colocarAspersor() {
 		self.validarColocarAspersor()
-		aspersores.establecerAspersor()
+		gestorDeAspersores.establecerAspersor()
 	}
 	}

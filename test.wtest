@@ -69,7 +69,7 @@ describe "Test del riego de cultivos"{
 describe "Test de la cosecha de cultivos" {
     test "Test de cosecha: Maiz" {
         personaje.sembrar(maiz)
-        personaje.cosechar()
+        assert.throwsException({personaje.cosechar()})
         assert.equals("Maiz", game.uniqueCollider(personaje).nombre())
         personaje.regar()
         personaje.cosechar()
@@ -78,10 +78,10 @@ describe "Test de la cosecha de cultivos" {
 
     test "Test de cosecha: Trigo" {
         personaje.sembrar(trigo)
-        personaje.cosechar()
+        assert.throwsException({personaje.cosechar()})
         assert.equals("Trigo", game.uniqueCollider(personaje).nombre())
         personaje.regar()
-        personaje.cosechar()
+        assert.throwsException({personaje.cosechar()})
         assert.equals("Trigo", game.uniqueCollider(personaje).nombre())
         personaje.regar()
         personaje.cosechar()
@@ -100,7 +100,7 @@ describe "Test de la cosecha de cultivos" {
 
     test "Test de cosecha: La planta no puede cosecharse" {
         personaje.sembrar(trigo)
-        personaje.cosechar()
+        assert.throwsException({personaje.cosechar()})
         assert.notThat(game.colliders(personaje).isEmpty())
         assert.equals(0, personaje.plantasCosechadas().size())
     }
@@ -154,7 +154,7 @@ describe "Test de la venta de cultivos y los mercados" {
         game.addVisual(personaje)
         personaje.position(game.at(0, 0))
         game.addVisual(mercadoPrueba)
-        personaje.vender()
+        assert.throwsException({personaje.vender()})
         assert.equals(0, personaje.oroActual())
         assert.notThat(personaje.plantasCosechadas().isEmpty())
         assert.equals(80, mercadoPrueba.monedas())

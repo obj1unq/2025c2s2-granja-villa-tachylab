@@ -1,7 +1,7 @@
 import wollok.game.*
 import personaje.*
 //Cultivos y factories
-object cultivos {
+object gestorDeCultivos {
 	//Atributos
 	const enLaGranja = #{}
 	//Metodos funcionales
@@ -60,21 +60,26 @@ class Maiz {
 	method precio() {
 		return precio
 	}
-	//Condiciones
+	//Condiciones y validaciones
 	method puedeCosecharse() {
 		return estado.sePuedeCosechar()
+	}
+	method validarCosechar() {
+		if (not self.puedeCosecharse()) {
+			self.error("No puede ser cosechado")
+		}
 	}
 	//Metodos funcionales
 	method regar() {
 		estado = estado.regado()
 	}
 	method cosechar(granjero) {
-		if (self.puedeCosecharse()) {
-			cultivos.sacarDeLaGranja(self)
+			self.validarCosechar()
+			gestorDeCultivos.sacarDeLaGranja(self)
 			granjero.añadirCosecha(self)
 			game.removeVisual(self)
-		}
 	}
+
 	method comprarCosechas(plantasCosechadas, granjero) {}
 }
 
@@ -96,9 +101,14 @@ class Trigo {
 	method etapa() {
 		return etapa
 	}
-	//Condiciones
+	//Condiciones y validaciones
 	method puedeCosecharse() {
 		return etapa >= 2
+	}
+	method validarCosechar() {
+		if (not self.puedeCosecharse()) {
+			self.error("No puede ser cosechado")
+		}
 	}
 	//Metodos funcionales
 	method regar() {
@@ -110,11 +120,10 @@ class Trigo {
 		}
 	}
 	method cosechar(granjero) {
-		if (self.puedeCosecharse()) {
-			cultivos.sacarDeLaGranja(self)
+			self.validarCosechar()
+			gestorDeCultivos.sacarDeLaGranja(self)
 			granjero.añadirCosecha(self)
 			game.removeVisual(self)
-		}
 	}
 	method precio() {
 		return (etapa - 1) * 100
@@ -158,14 +167,18 @@ class Tomaco {
 			position.up(1)
 		}
 	}
-	//Metodos funcionales
-	method regar() {
-		if (self.puedeCrecer()) {
-			position = self.nuevaPosicionCrecer()
+	method validarRegar() {
+		if (not self.puedeCrecer()) {
+			self.error("No puede crecer")
 		}
 	}
+	//Metodos funcionales
+	method regar() {
+			self.validarRegar()
+			position = self.nuevaPosicionCrecer()
+	}
 	method cosechar(granjero) {
-		cultivos.sacarDeLaGranja(self)
+		gestorDeCultivos.sacarDeLaGranja(self)
 		granjero.añadirCosecha(self)
 		game.removeVisual(self)
 	}

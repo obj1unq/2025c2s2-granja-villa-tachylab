@@ -26,7 +26,7 @@ program farmville {
 	keyboard.a().onPressDo({personaje.colocarAspersor()})
 
 	//EVENTOS
-	game.onTick(1000, "ActivarAspersores", {aspersores.activar()})
+	game.onTick(1000, "ActivarAspersores", {gestorDeAspersores.activar()})
  	//  COMIENZA
 	game.start()
 }
